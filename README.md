@@ -1,5 +1,7 @@
 # Bella — an enterprise MCP server for Claude
 
+[![tests](https://github.com/victor-velazquez-ai/bella-mcp-course/actions/workflows/ci.yml/badge.svg)](https://github.com/victor-velazquez-ai/bella-mcp-course/actions/workflows/ci.yml)
+
 **Course repo for _"Build an Enterprise MCP Server: Connect Claude to Your Company's Data"_** by Victor Velázquez.
 
 Bella is the AI data analyst of *Brightline Outdoor* (a fictional outdoor-gear retailer). She lives behind an **MCP server**, so you can ask Claude — Desktop, Code or claude.ai — *"who were our top Enterprise customers this year?"* and get an answer from the company database, safely.

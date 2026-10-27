@@ -30,7 +30,7 @@ Keep it SQLite to start (load CSVs with `sqlite3` or `pandas.to_sql`). Moving to
 - [ ] Read-only connection + authorizer + limits (`db.py`) — and `lessons/03_attack_the_guard.py` adapted to your data
 - [ ] Roles/scopes, tools hidden by role (`auth.py`)
 - [ ] Audit log + rate limiting (`audit.py`)
-- [ ] Tests green in CI: copy `docs/ci.yml` to `.github/workflows/ci.yml` (runs `verify.py` on every push)
+- [ ] Tests green in CI: `.github/workflows/ci.yml` runs `verify.py` on every push — keep it, and the badge at the top of the README
 - [ ] `python verify.py` green
 
 ## 4. Ship it (1 hour)
