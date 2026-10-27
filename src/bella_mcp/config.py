@@ -14,7 +14,15 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-ROOT = Path(__file__).resolve().parents[2]
+def _find_root() -> Path:
+    """The repo folder (editable install), BELLA_HOME (containers), or the current folder."""
+    if home := os.getenv("BELLA_HOME"):
+        return Path(home).resolve()
+    repo = Path(__file__).resolve().parents[2]
+    return repo if (repo / "pyproject.toml").exists() else Path.cwd()
+
+
+ROOT = _find_root()
 load_dotenv(ROOT / ".env")
 
 
