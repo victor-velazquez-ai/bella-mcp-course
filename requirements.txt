@@ -1,0 +1,2 @@
+# Same as `pip install -e ".[dev]"` — kept for people who prefer requirements files.
+-e .[dev]

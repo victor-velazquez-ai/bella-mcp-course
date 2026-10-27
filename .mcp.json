@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "bella": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["-m", "bella_mcp"],
+      "env": {}
+    }
+  }
+}

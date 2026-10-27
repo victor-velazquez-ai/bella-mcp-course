@@ -1,0 +1,36 @@
+[project]
+name = "bella-mcp"
+version = "1.0.0"
+description = "Bella: an enterprise MCP server that lets Claude query a company database safely. Course repo for 'Build an Enterprise MCP Server'."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Victor Velázquez" }]
+keywords = ["mcp", "model-context-protocol", "fastmcp", "claude", "oauth", "sqlite", "enterprise"]
+dependencies = [
+    # The MCP framework. Pinned to the 4.x line (MCP spec 2026-07-28).
+    "fastmcp>=4.1,<5",
+    # Bella's brain. Only used if you set an API key; without one Bella runs in demo mode.
+    "anthropic>=2.0",
+    "openai>=1.0",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.23"]
+
+[project.scripts]
+bella-mcp = "bella_mcp.__main__:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+filterwarnings = ["ignore::DeprecationWarning"]
