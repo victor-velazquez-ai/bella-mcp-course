@@ -15,7 +15,7 @@ You ─▶ Claude ─▶ MCP ─▶ Bella ─▶ guard ─▶ SQLite (read-only)
 - ✅ Runs with **zero API keys**: Bella's brain uses your **Claude subscription** through Claude Code (or an API key, or a free demo mode)
 - ✅ stdio **and** Streamable HTTP · MCP spec **2026-07-28** via FastMCP 4
 - ✅ OAuth 2.1 resource server · roles → scopes → tools · column-level PII masking
-- ✅ 52 tests, including auth over real HTTP and the stdio transport
+- ✅ 59 tests, including auth over real HTTP and the stdio transport — CI on every push
 
 ---
 
