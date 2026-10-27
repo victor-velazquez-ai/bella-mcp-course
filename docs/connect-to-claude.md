@@ -22,7 +22,9 @@ claude mcp add bella -- python -m bella_mcp
 Or do nothing: the repo ships a `.mcp.json`, so opening the folder in Claude Code offers to enable `bella` (project scope).
 Check with `/mcp` inside Claude Code, then ask: *"Using Bella, what were our top 5 Enterprise customers this year?"*
 
-Bella's brain needs `ANTHROPIC_API_KEY` (or `OPENAI_API_KEY`) in `.env` to turn English into SQL. Without it, `ask_bella` runs in demo mode and Claude simply writes the SQL itself — it still works.
+**Bella's brain** (turns English into SQL inside `ask_bella`) needs no API key: if Claude Code is installed and logged in, she borrows **your Claude subscription** by running `claude -p` with every tool switched off. Check with `curl http://localhost:8000/health` (HTTP mode) — `"brain": "claude-code"`. If `claude` isn't on Bella's PATH (common with Claude Desktop), set `BELLA_CLAUDE_BIN` in `.env` to its full path. An `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` takes priority; with none of these, `ask_bella` runs in demo mode and Claude simply writes the SQL itself — it still works.
+
+> Subscription mode is for **your own machine**. A deployed server that other people use (the custom connector in §4) should use an API key.
 
 The local role is `analyst` (no personal data). Try `BELLA_LOCAL_ROLE=admin` in `.env` to see emails.
 
@@ -92,4 +94,5 @@ What happens behind "Connect" (the theory, live): Claude calls `/mcp` without a 
 | `421 Misdirected Request` behind a tunnel | Set `BELLA_PUBLIC_URL` to the public URL so its hostname is allowed |
 | OAuth redirect error from GitHub | The OAuth App callback must be exactly `<BELLA_PUBLIC_URL>/auth/callback` |
 | Everyone is logged out after a restart | Set a stable `BELLA_JWT_SIGNING_KEY` |
-| `ask_bella` says it's in demo mode | Add `ANTHROPIC_API_KEY` to `.env` — or let Claude send SQL, which works without a key |
+| `ask_bella` says it's in demo mode | Bella didn't find Claude Code: install it and log in once, or set `BELLA_CLAUDE_BIN` (or add `ANTHROPIC_API_KEY`) in `.env`, then restart Bella — or just let Claude send SQL, which always works |
+| `ask_bella`: "brain (Claude Code) failed: Not logged in" | Run `claude` once and `/login` with your Claude account |

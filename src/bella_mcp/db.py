@@ -20,6 +20,7 @@ import re
 import sqlite3
 import time
 from dataclasses import dataclass, field
+from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -162,4 +163,17 @@ def schema_markdown(db_path: Path) -> str:
         "- **Region** comes from the sales rep (sales.region / sales_reps.region).",
         "- Emails are personal data: they read as NULL unless the caller has the bella:pii scope.",
     ]
+    if info.get("as_of_date"):
+        lines.append(_relative_periods(info["as_of_date"]))
     return "\n".join(lines)
+
+
+def _relative_periods(as_of: str) -> str:
+    """'last quarter' etc. as explicit dates, so Claude and Bella's brain mean the same thing."""
+    today = date.fromisoformat(as_of)
+    first_open = today + timedelta(days=1)  # a period that ends on the as-of date is complete
+    month_end = first_open.replace(day=1) - timedelta(days=1)
+    quarter_end = first_open.replace(day=1, month=(first_open.month - 1) // 3 * 3 + 1) - timedelta(days=1)
+    quarter_start = quarter_end.replace(day=1, month=(quarter_end.month - 1) // 3 * 3 + 1)
+    return (f"- **Relative periods** (counted back from {as_of}): this year = {today.year}-01-01 to {as_of} · "
+            f"last month = {month_end.replace(day=1)} to {month_end} · last quarter = {quarter_start} to {quarter_end}.")

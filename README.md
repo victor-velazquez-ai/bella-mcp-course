@@ -10,7 +10,7 @@ You ─▶ Claude ─▶ MCP ─▶ Bella ─▶ guard ─▶ SQLite (read-only)
                         └─ auth (none / JWT / GitHub OAuth) · scopes · PII masking · audit · rate limits
 ```
 
-- ✅ Runs with **zero API keys** (demo mode) — add `ANTHROPIC_API_KEY` for Bella's full brain
+- ✅ Runs with **zero API keys**: Bella's brain uses your **Claude subscription** through Claude Code (or an API key, or a free demo mode)
 - ✅ stdio **and** Streamable HTTP · MCP spec **2026-07-28** via FastMCP 4
 - ✅ OAuth 2.1 resource server · roles → scopes → tools · column-level PII masking
 - ✅ 52 tests, including auth over real HTTP and the stdio transport
@@ -89,7 +89,7 @@ Roles: **viewer** (`bella:read`) · **analyst** (+ `bella:query`) · **admin** (
 ```
 src/bella_mcp/
   config.py   settings from env (.env)          db.py      the guard (layers 2-5) + schema
-  seed.py     builds the demo database          brain.py   English → SQL (Claude / OpenAI / demo)
+  seed.py     builds the demo database          brain.py   English → SQL (Claude API / subscription / OpenAI / demo)
   auth.py     auth modes, roles, scopes         audit.py   audit middleware (layer 6)
   server.py   build_server(): tools, resource, prompt, /health
   __main__.py python -m bella_mcp [stdio|http]
